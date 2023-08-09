@@ -1,28 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:providertutorial/favourite_provider.dart';
-import 'package:providertutorial/myfavourites.dart';
-
-class FavouriteScreen extends StatefulWidget {
-  const FavouriteScreen({Key? key}) : super(key: key);
+class Favourite extends StatefulWidget {
+  const Favourite({Key? key}) : super(key: key);
 
   @override
-  State<FavouriteScreen> createState() => _FavouriteScreenState();
+  State<Favourite> createState() => _FavouriteState();
 }
 
-class _FavouriteScreenState extends State<FavouriteScreen> {
+class _FavouriteState extends State<Favourite> {
   @override
   Widget build(BuildContext context) {
-    // final favouriteProvider = Provider.of<FavouriteProvider>(context, listen: false);
+    final favouriteProvider = Provider.of<FavouriteProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Favourite'),
+        title: Text('Favourite List'),
         actions: [
-          InkWell(
-              onTap: (){
-                Navigator.push(context,MaterialPageRoute(builder: (context)=>Favourite()));
-              },
-              child: Icon(Icons.menu_sharp)),
           SizedBox(width: 20,),
         ],
       ),
@@ -30,7 +23,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
         children: [
           Expanded(
             child: ListView.builder(
-                itemCount: 100,
+                itemCount: favouriteProvider.selectedItem.length,
                 itemBuilder: (context, index) {
                   return Consumer<FavouriteProvider>(
                     builder: (BuildContext context, value, Widget? child) {
@@ -40,7 +33,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                             value.removeItem(index);
                           }
                           else{
-                          value.addItem(index);
+                            value.addItem(index);
                           }
                         },
                         title: Text('Item ' + index.toString()),

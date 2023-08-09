@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:providertutorial/count_example.dart';
 import 'package:providertutorial/count_provider.dart';
+import 'package:providertutorial/favourite_provider.dart';
 import 'package:providertutorial/favourite_screen.dart';
 import 'package:providertutorial/slider_provider.dart';
 import 'package:providertutorial/slider_screen.dart';
@@ -23,6 +24,9 @@ class MyApp extends StatelessWidget {
     },),
         ChangeNotifierProvider(create: (BuildContext context) {
       return SliderProvider();
+    },),
+        ChangeNotifierProvider(create: (BuildContext context) {
+      return FavouriteProvider();
     },),
       ],
 
